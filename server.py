@@ -138,6 +138,8 @@ class RequestHandler(BaseHTTPRequestHandler):
     If anything goes wrong, an error page is constructed.
     '''
 
+    protocol_version = 'HTTP/1.1'
+
     Cases = [case_no_file(),
              case_cgi_file(),
              case_existing_file(),
