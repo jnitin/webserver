@@ -1,0 +1,27 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="14">
+            <item index="0" class="java.lang.String" itemvalue="flask_marshmallow" />
+            <item index="1" class="java.lang.String" itemvalue="marshmallow-sqlalchemy" />
+            <item index="2" class="java.lang.String" itemvalue="fbprophet" />
+            <item index="3" class="java.lang.String" itemvalue="holidays" />
+            <item index="4" class="java.lang.String" itemvalue="flask_migrate" />
+            <item index="5" class="java.lang.String" itemvalue="sklearn" />
+            <item index="6" class="java.lang.String" itemvalue="marshmallow" />
+            <item index="7" class="java.lang.String" itemvalue="ortools" />
+            <item index="8" class="java.lang.String" itemvalue="flask_restful" />
+            <item index="9" class="java.lang.String" itemvalue="flask_script" />
+            <item index="10" class="java.lang.String" itemvalue="flask_sqlalchemy" />
+            <item index="11" class="java.lang.String" itemvalue="pytest-runner" />
+            <item index="12" class="java.lang.String" itemvalue="pytest" />
+            <item index="13" class="java.lang.String" itemvalue="tox" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

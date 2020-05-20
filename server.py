@@ -1,5 +1,7 @@
 import sys, os
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, HTTPServer , ThreadingHTTPServer
+from time import sleep
+import threading
 
 #-------------------------------------------------------------------------------
 
@@ -163,6 +165,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             # Figure out how to handle it.
             for case in self.Cases:
                 if case.test(self):
+                    print("Active Thread Count ", threading.active_count())
                     case.act(self)
                     break
 
@@ -187,5 +190,5 @@ class RequestHandler(BaseHTTPRequestHandler):
 
 if __name__ == '__main__':
     serverAddress = ('', 8080)
-    server = HTTPServer(serverAddress, RequestHandler)
+    server = ThreadingHTTPServer(serverAddress, RequestHandler)
     server.serve_forever()
