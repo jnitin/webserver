@@ -1,6 +1,8 @@
 import os
 from http.server import ThreadingHTTPServer , CGIHTTPRequestHandler
 import threading
+import logging
+from sys import argv
 
 #-------------------------------------------------------------------------------
 
@@ -157,6 +159,7 @@ class RequestHandler(CGIHTTPRequestHandler):
 
     # Classify and handle request.
     def do_GET(self):
+        logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
         try:
 
             # Figure out what exactly is being requested.
@@ -171,34 +174,46 @@ class RequestHandler(CGIHTTPRequestHandler):
 
         # Handle errors.
         except Exception as msg:
+            logging.info('Exception Occured...\n')
             self.handle_error(msg)
-
-    # def do_POST(self):
-    #     '''Reads post request body'''
-    #     print("Method : do_POST")
 
 
     def do_PUT(self):
-        print("Method : do_PUT")
+        logging.info('PUT Request...\n')
         self.do_POST()
 
 
     # Handle unknown objects.
     def handle_error(self, msg):
+        logging.info('handle_error...\n')
         content = self.Error_Page.format(path=self.path, msg=msg)
         self.send_content(content, 404)
 
     # Send actual content.
     def send_content(self, content, status=200):
+        logging.info('send_content...\n')
         self.send_response(status)
-        self.send_header("Content-type", "text/pdf")
+        self.send_header("Content-type", "text/html")
         self.send_header("Content-Length", str(len(content)))
         self.end_headers()
+        logging.info("GET response,\nStatus: %s\nHeaders:\n%s\n", str(status), str(self.headers))
         self.wfile.write(content)
 
 #-------------------------------------------------------------------------------
+def run(server_class=ThreadingHTTPServer, handler_class=RequestHandler, port=8080):
+    logging.basicConfig(level=logging.INFO)
+    server_address = ('', port)
+    server = server_class(server_address, handler_class)
+    logging.info('Starting webserver...\n')
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        pass
+    server.server_close()
+    logging.info('Stopping server...\n')
 
 if __name__ == '__main__':
-    serverAddress = ('', 8080)
-    server = ThreadingHTTPServer(serverAddress, RequestHandler)
-    server.serve_forever()
+    if len(argv) == 2:
+        run(port=int(argv[1]))
+    else:
+        run()
