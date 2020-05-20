@@ -1,5 +1,5 @@
 import sys, os
-from http.server import BaseHTTPRequestHandler, HTTPServer , ThreadingHTTPServer
+from http.server import BaseHTTPRequestHandler, HTTPServer , ThreadingHTTPServer , SimpleHTTPRequestHandler
 from time import sleep
 import threading
 
@@ -131,8 +131,7 @@ class case_always_fail(base_case):
         raise ServerException("Unknown object '{0}'".format(handler.path))
 
 #-------------------------------------------------------------------------------
-
-class RequestHandler(BaseHTTPRequestHandler):
+class RequestHandler(SimpleHTTPRequestHandler):
     '''
     If the requested path maps to a file, that file is served.
     If anything goes wrong, an error page is constructed.
