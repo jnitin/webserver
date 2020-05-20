@@ -1,5 +1,8 @@
-import sys, os
-from http.server import BaseHTTPRequestHandler, HTTPServer
+import os
+from http.server import ThreadingHTTPServer , CGIHTTPRequestHandler
+import threading
+import logging
+from sys import argv
 
 #-------------------------------------------------------------------------------
 
@@ -129,12 +132,13 @@ class case_always_fail(base_case):
         raise ServerException("Unknown object '{0}'".format(handler.path))
 
 #-------------------------------------------------------------------------------
-
-class RequestHandler(BaseHTTPRequestHandler):
+class RequestHandler(CGIHTTPRequestHandler):
     '''
     If the requested path maps to a file, that file is served.
     If anything goes wrong, an error page is constructed.
     '''
+
+    protocol_version = 'HTTP/1.1'
 
     Cases = [case_no_file(),
              case_cgi_file(),
@@ -155,6 +159,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 
     # Classify and handle request.
     def do_GET(self):
+        logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
         try:
 
             # Figure out what exactly is being requested.
@@ -163,29 +168,52 @@ class RequestHandler(BaseHTTPRequestHandler):
             # Figure out how to handle it.
             for case in self.Cases:
                 if case.test(self):
+                    print("Active Thread Count ", threading.active_count())
                     case.act(self)
                     break
 
         # Handle errors.
         except Exception as msg:
+            logging.info('Exception Occured...\n')
             self.handle_error(msg)
+
+
+    def do_PUT(self):
+        logging.info('PUT Request...\n')
+        self.do_POST()
+
 
     # Handle unknown objects.
     def handle_error(self, msg):
+        logging.info('handle_error...\n')
         content = self.Error_Page.format(path=self.path, msg=msg)
         self.send_content(content, 404)
 
     # Send actual content.
     def send_content(self, content, status=200):
+        logging.info('send_content...\n')
         self.send_response(status)
         self.send_header("Content-type", "text/html")
         self.send_header("Content-Length", str(len(content)))
         self.end_headers()
+        logging.info("GET response,\nStatus: %s\nHeaders:\n%s\n", str(status), str(self.headers))
         self.wfile.write(content)
 
 #-------------------------------------------------------------------------------
+def run(server_class=ThreadingHTTPServer, handler_class=RequestHandler, port=8080):
+    logging.basicConfig(level=logging.INFO)
+    server_address = ('', port)
+    server = server_class(server_address, handler_class)
+    logging.info('Starting webserver...\n')
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        pass
+    server.server_close()
+    logging.info('Stopping server...\n')
 
 if __name__ == '__main__':
-    serverAddress = ('', 8080)
-    server = HTTPServer(serverAddress, RequestHandler)
-    server.serve_forever()
+    if len(argv) == 2:
+        run(port=int(argv[1]))
+    else:
+        run()
