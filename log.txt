@@ -21,3 +21,5 @@ Accept: */*
 
 
 
+INFO:root:Stopping server...
+

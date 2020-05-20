@@ -159,7 +159,7 @@ class RequestHandler(CGIHTTPRequestHandler):
 
     # Classify and handle request.
     def do_GET(self):
-        logging.info("GET request,\nPath: %s\nHeaders:\n%s\n", str(self.path), str(self.headers))
+        logging.info("\n%s\nPath: %s\nHeaders:\n%s",str(self.requestline), str(self.path), str(self.headers))
         try:
 
             # Figure out what exactly is being requested.
@@ -196,8 +196,8 @@ class RequestHandler(CGIHTTPRequestHandler):
         self.send_header("Content-type", "text/html")
         self.send_header("Content-Length", str(len(content)))
         self.end_headers()
-        logging.info("GET response,\nStatus: %s\nHeaders:\n%s\n", str(status), str(self.headers))
         self.wfile.write(content)
+        logging.info("Response,\nBody: %s\n", str(content))
 
 #-------------------------------------------------------------------------------
 def run(server_class=ThreadingHTTPServer, handler_class=RequestHandler, port=8080):
@@ -210,7 +210,7 @@ def run(server_class=ThreadingHTTPServer, handler_class=RequestHandler, port=808
     except KeyboardInterrupt:
         pass
     server.server_close()
-    logging.info('Stopping server...\n')
+    logging.info('Stopping webserver...\n')
 
 if __name__ == '__main__':
     if len(argv) == 2:
