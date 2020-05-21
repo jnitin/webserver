@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6ba33aee-9a3f-4394-8ac3-85201710c6b9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_cgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploadfileindex.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,22 +68,22 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1237" height="217" key="GridCell.Tab.0.bottom" timestamp="1590006783394">
+    <state width="1237" height="87" key="GridCell.Tab.0.bottom" timestamp="1590033721545">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="217" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1590006783394" />
-    <state width="1237" height="217" key="GridCell.Tab.0.center" timestamp="1590006783394">
+    <state width="1237" height="87" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1590033721545" />
+    <state width="1237" height="87" key="GridCell.Tab.0.center" timestamp="1590033721545">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="217" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1590006783394" />
-    <state width="1237" height="217" key="GridCell.Tab.0.left" timestamp="1590006783394">
+    <state width="1237" height="87" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1590033721545" />
+    <state width="1237" height="87" key="GridCell.Tab.0.left" timestamp="1590033721545">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="217" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1590006783394" />
-    <state width="1237" height="217" key="GridCell.Tab.0.right" timestamp="1590006783394">
+    <state width="1237" height="87" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1590033721545" />
+    <state width="1237" height="87" key="GridCell.Tab.0.right" timestamp="1590033721545">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="217" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1590006783394" />
+    <state width="1237" height="87" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1590033721545" />
     <state width="1237" height="218" key="GridCell.Tab.1.bottom" timestamp="1590006761289">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -106,36 +108,5 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="205" y="69" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1280.680@0.0.1280.680" timestamp="1590001164373" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/server.py</url>
-          <line>58</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/server.py</url>
-          <line>57</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/server.py</url>
-          <line>61</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/server.py</url>
-          <line>60</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/server.py</url>
-          <line>66</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

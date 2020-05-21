@@ -8,6 +8,18 @@ import subprocess
 
 cgitb.enable() # enable CGI error reporting
 
+LOG_FILENAME = "webserverlog.txt"
+logger = logging.getLogger('server.py')
+logger.setLevel(logging.INFO)
+# create console handler and set level to debug
+ch = logging.FileHandler(filename=LOG_FILENAME)
+# create formatter
+formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+# add formatter to ch
+ch.setFormatter(formatter)
+# add ch to logger
+logger.addHandler(ch)
+
 
 #-------------------------------------------------------------------------------
 
@@ -149,6 +161,9 @@ class RequestHandler(CGIHTTPRequestHandler):
 
     protocol_version = 'HTTP/1.1'
 
+    buffer = 1
+    log_file = open(LOG_FILENAME, 'w', buffer)
+
     Cases = [case_no_file(),
              case_cgi_file(),
              case_existing_file(),
@@ -168,7 +183,7 @@ class RequestHandler(CGIHTTPRequestHandler):
 
     # Classify and handle request.
     def do_GET(self):
-        logging.info("\n%s\nPath: %s\nHeaders:\n%s",str(self.requestline), str(self.path), str(self.headers))
+        logger.info("\n%s\nPath: %s\nHeaders:\n%s",str(self.requestline), str(self.path), str(self.headers))
         try:
 
             # Figure out what exactly is being requested.
@@ -177,49 +192,57 @@ class RequestHandler(CGIHTTPRequestHandler):
             # Figure out how to handle it.
             for case in self.Cases:
                 if case.test(self):
-                    print("Active Thread Count ", threading.active_count())
+                    logger.info("Active Thread Count %s ", threading.active_count())
                     case.act(self)
                     break
 
         # Handle errors.
         except Exception as msg:
-            logging.info('Exception Occured...\n')
+            logger.info('Exception Occured...\n')
             self.handle_error(msg)
 
 
     def do_PUT(self):
-        logging.info('PUT Request...\n')
+        logger.info('PUT Request...\n')
         self.do_POST()
 
 
     # Handle unknown objects.
     def handle_error(self, msg):
-        logging.info('handle_error...\n')
+        logger.info('handle_error...\n')
         content = self.Error_Page.format(path=self.path, msg=msg)
         self.send_content(content, 404)
 
     # Send actual content.
     def send_content(self, content, status=200):
-        logging.info('send_content...\n')
+        logger.info('send_content...\n')
         self.send_response(status)
         self.send_header("Content-type", "text/html")
         self.send_header("Content-Length", str(len(content)))
         self.end_headers()
         self.wfile.write(content)
-        logging.info("Response,\nBody: %s\n", str(content))
+        logger.info("Response,\nBody: %s\n", str(content))
+
+
+
+    def log_message(self, format, *args):
+        self.log_file.write("%s - - [%s] %s\n" %
+                            (self.client_address[0],
+                             self.log_date_time_string(),
+                             format % args))
+
 
 #-------------------------------------------------------------------------------
 def run(server_class=ThreadingHTTPServer, handler_class=RequestHandler, port=8080):
-    logging.basicConfig(level=logging.INFO)
     server_address = ('', port)
     server = server_class(server_address, handler_class)
-    logging.info('Starting webserver...\n')
+    logger.info('Starting webserver...\n')
     try:
         server.serve_forever()
     except KeyboardInterrupt:
         pass
     server.server_close()
-    logging.info('Stopping webserver...\n')
+    logger.info('Stopping webserver...\n')
 
 if __name__ == '__main__':
     if len(argv) == 2:
