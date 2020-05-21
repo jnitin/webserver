@@ -198,6 +198,7 @@ class RequestHandler(CGIHTTPRequestHandler):
             self.handle_error(msg)
 
     def do_POST(self):
+        logger.info("\n%s\nPath: %s\nHeaders:\n%s", str(self.requestline), str(self.path), str(self.headers))
         content_length = int(self.headers['Content-Length'])
         body = self.rfile.read(content_length)
         self.send_response(200)
@@ -209,6 +210,7 @@ class RequestHandler(CGIHTTPRequestHandler):
         self.wfile.write(response.getvalue())
 
     def do_PUT(self):
+        logger.info("\n%s\nPath: %s\nHeaders:\n%s", str(self.requestline), str(self.path), str(self.headers))
         """Save a file following a HTTP PUT request"""
         filename = os.path.basename(self.path)
 

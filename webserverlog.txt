@@ -1,1 +1,2 @@
-127.0.0.1 - - [21/May/2020 10:39:17] "PUT /puturl.tmp HTTP/1.1" 201 -
+2020-05-21 12:42:42,688 - __main__ - INFO - Starting webserver...
+
