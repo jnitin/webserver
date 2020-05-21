@@ -3,6 +3,11 @@ from http.server import ThreadingHTTPServer , CGIHTTPRequestHandler
 import threading
 import logging
 from sys import argv
+import cgitb
+import subprocess
+
+cgitb.enable() # enable CGI error reporting
+
 
 #-------------------------------------------------------------------------------
 
@@ -51,10 +56,14 @@ class case_cgi_file(base_case):
 
     def run_cgi(self, handler):
         cmd = "python " + handler.full_path
-        child_stdin, child_stdout = os.popen2(cmd)
-        child_stdin.close()
-        data = child_stdout.read()
-        child_stdout.close()
+        # child_stdin, child_stdout = os.popen2(cmd)
+        # child_stdin.close()
+        p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        data =  p.stdout.read()
+            # print
+            # line,
+        # data = child_stdout.read()
+        # child_stdout.close()
         handler.send_content(data)
 
     def test(self, handler):
