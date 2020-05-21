@@ -1,2 +1,227 @@
-2020-05-21 12:42:42,688 - __main__ - INFO - Starting webserver...
+127.0.0.1 - - [21/May/2020 13:13:51] "GET /subdir/ HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2020 13:14:03] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2020 13:14:12] "GET /cgi-bin/ HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2020 13:14:26] "GET /docs/ HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2020 13:14:34] "GET /test/ HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2020 13:14:39] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2020 13:14:51] "GET /test/1.txt HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2020 13:15:08] "GET /test/ HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2020 13:15:13] "GET /test/a.html HTTP/1.1" 200 -
+127.0.0.1 - - [21/May/2020 13:15:45] "GET /test/1.txt HTTP/1.1" 200 -
+age: en-US,en;q=0.9
+
+
+2020-05-21 13:13:51,164 - __main__ - INFO - Active Thread Count 3 
+2020-05-21 13:13:51,165 - __main__ - INFO - send_content...
+
+2020-05-21 13:13:51,166 - __main__ - INFO - Response,
+Body: b'        <html>\n        <body>\n        <ul>\n        <li>500L.pdf</li>\n<li>a.html</li>\n<li>b.html</li>\n        </ul>\n        </body>\n        </html>\n        '
+
+2020-05-21 13:14:03,208 - __main__ - INFO - 
+GET / HTTP/1.1
+Path: /
+Headers:
+Host: 127.0.0.1:8080
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+
+
+2020-05-21 13:14:03,208 - __main__ - INFO - Active Thread Count 3 
+2020-05-21 13:14:03,209 - __main__ - INFO - send_content...
+
+2020-05-21 13:14:03,209 - __main__ - INFO - Response,
+Body: b'<html>\r\n<head>\r\n<title>Index Page</title>\r\n</head>\r\n<body>\r\n<h1>Index Page</h1>\r\n<p>Welcome to our directory.</p>\r\n</body>\r\n</html>\r\n'
+
+2020-05-21 13:14:12,453 - __main__ - INFO - 
+GET /cgi-bin/ HTTP/1.1
+Path: /cgi-bin/
+Headers:
+Host: 127.0.0.1:8080
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+
+
+2020-05-21 13:14:12,453 - __main__ - INFO - Active Thread Count 3 
+2020-05-21 13:14:12,454 - __main__ - INFO - send_content...
+
+2020-05-21 13:14:12,454 - __main__ - INFO - Response,
+Body: b'        <html>\n        <body>\n        <ul>\n        <li>retrieval.py</li>\n<li>save_file.py</li>\n        </ul>\n        </body>\n        </html>\n        '
+
+2020-05-21 13:14:26,215 - __main__ - INFO - 
+GET /docs/ HTTP/1.1
+Path: /docs/
+Headers:
+Host: 127.0.0.1:8080
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+
+
+2020-05-21 13:14:26,216 - __main__ - INFO - Active Thread Count 3 
+2020-05-21 13:14:26,216 - __main__ - INFO - send_content...
+
+2020-05-21 13:14:26,217 - __main__ - INFO - Response,
+Body: b'        <html>\n        <body>\n        <ul>\n        <li>SRS_Web_Server_Draft_0.2_Group11.xls</li>\n        </ul>\n        </body>\n        </html>\n        '
+
+2020-05-21 13:14:34,214 - __main__ - INFO - 
+GET /test/ HTTP/1.1
+Path: /test/
+Headers:
+Host: 127.0.0.1:8080
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+
+
+2020-05-21 13:14:34,215 - __main__ - INFO - Active Thread Count 3 
+2020-05-21 13:14:34,215 - __main__ - INFO - send_content...
+
+2020-05-21 13:14:34,216 - __main__ - INFO - Response,
+Body: b'        <html>\n        <body>\n        <ul>\n        <li>1.txt</li>\n<li>a.html</li>\n        </ul>\n        </body>\n        </html>\n        '
+
+2020-05-21 13:14:39,791 - __main__ - INFO - 
+GET / HTTP/1.1
+Path: /
+Headers:
+Host: 127.0.0.1:8080
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Purpose: prefetch
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+
+
+2020-05-21 13:14:39,792 - __main__ - INFO - Active Thread Count 3 
+2020-05-21 13:14:39,793 - __main__ - INFO - send_content...
+
+2020-05-21 13:14:39,793 - __main__ - INFO - Response,
+Body: b'<html>\r\n<head>\r\n<title>Index Page</title>\r\n</head>\r\n<body>\r\n<h1>Index Page</h1>\r\n<p>Welcome to our directory.</p>\r\n</body>\r\n</html>\r\n'
+
+2020-05-21 13:14:51,105 - __main__ - INFO - 
+GET /test/1.txt HTTP/1.1
+Path: /test/1.txt
+Headers:
+Host: 127.0.0.1:8080
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+
+
+2020-05-21 13:14:51,106 - __main__ - INFO - Active Thread Count 3 
+2020-05-21 13:14:51,110 - __main__ - INFO - send_content...
+
+2020-05-21 13:14:51,111 - __main__ - INFO - Response,
+Body: b''
+
+2020-05-21 13:15:08,380 - __main__ - INFO - 
+GET /test/ HTTP/1.1
+Path: /test/
+Headers:
+Host: 127.0.0.1:8080
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+
+
+2020-05-21 13:15:08,381 - __main__ - INFO - Active Thread Count 3 
+2020-05-21 13:15:08,382 - __main__ - INFO - send_content...
+
+2020-05-21 13:15:08,383 - __main__ - INFO - Response,
+Body: b'        <html>\n        <body>\n        <ul>\n        <li>1.txt</li>\n<li>a.html</li>\n        </ul>\n        </body>\n        </html>\n        '
+
+2020-05-21 13:15:13,581 - __main__ - INFO - 
+GET /test/a.html HTTP/1.1
+Path: /test/a.html
+Headers:
+Host: 127.0.0.1:8080
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+
+
+2020-05-21 13:15:13,581 - __main__ - INFO - Active Thread Count 3 
+2020-05-21 13:15:13,582 - __main__ - INFO - send_content...
+
+2020-05-21 13:15:13,582 - __main__ - INFO - Response,
+Body: b'<html>\r\n<head>\r\n<title>Page A</title>\r\n</head>\r\n<body>\r\n<h1>Page A</h1>\r\n</body>\r\n</html>\r\n'
+
+2020-05-21 13:15:45,640 - __main__ - INFO - 
+GET /test/1.txt HTTP/1.1
+Path: /test/1.txt
+Headers:
+Host: 127.0.0.1:8080
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept-Language: en-US,en;q=0.9
+
+
+2020-05-21 13:15:45,640 - __main__ - INFO - Active Thread Count 3 
+2020-05-21 13:15:45,641 - __main__ - INFO - send_content...
+
+2020-05-21 13:15:45,641 - __main__ - INFO - Response,
+Body: b'Hello World!'
 
