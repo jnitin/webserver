@@ -15,12 +15,12 @@ else:
     message = 'No file was uploaded'
 
 
-print "Content-type: text/html"
-print ""
-print """
+print("Content-type: text/html")
+print("")
+print("""
 <html>
 <body>
   <p> %s </p
 </body>
 </html>
-""" % message
+""" % message)

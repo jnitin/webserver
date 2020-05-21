@@ -1,10 +1,12 @@
 import os
-from http.server import ThreadingHTTPServer , CGIHTTPRequestHandler
-import threading
+from http.server import CGIHTTPRequestHandler , ThreadingHTTPServer
 import logging
 from sys import argv
 import cgitb
 from io import BytesIO
+import subprocess
+from subprocess import Popen
+
 
 cgitb.enable() # enable CGI error reporting
 
@@ -65,8 +67,7 @@ class case_no_file(base_case):
 
 #-------------------------------------------------------------------------------
 
-import subprocess
-from subprocess import Popen
+
 
 
 class case_cgi_file(base_case):
@@ -79,6 +80,7 @@ class case_cgi_file(base_case):
         # data = child_stdout.read()
         # child_stdout.close()
         p = Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+        # p = Popen(['python', handler.full_path], stdout=subprocess.PIPE, bufsize=0)
         data, errors = p.communicate()
         handler.send_content(data.encode('utf-8'))
 
@@ -159,6 +161,7 @@ class case_always_fail(base_case):
         raise ServerException("Unknown object '{0}'".format(handler.path))
 
 #-------------------------------------------------------------------------------
+
 class RequestHandler(CGIHTTPRequestHandler):
     '''
     If the requested path maps to a file, that file is served.
@@ -186,6 +189,15 @@ class RequestHandler(CGIHTTPRequestHandler):
         </body>
         </html>
         """
+
+    def guess_type(self, path):
+        mimetype = CGIHTTPRequestHandler.guess_type(
+            self, path
+        )
+        if mimetype == 'application/octet-stream':
+            if path.endswith('manifest'):
+                mimetype = 'text/cache-manifest'
+        return mimetype
 
     # Classify and handle request.
     def do_GET(self):
@@ -249,7 +261,7 @@ class RequestHandler(CGIHTTPRequestHandler):
     def send_content(self, content, status=200):
         logger.info('send_content...\n')
         self.send_response(status)
-        self.send_header("Content-type", "text/html")
+        self.send_header("Content-type", self.guess_type(path=self.full_path))
         self.send_header("Content-Length", str(len(content)))
         self.end_headers()
         self.wfile.write(content)
