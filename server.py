@@ -56,27 +56,37 @@ class case_no_file(base_case):
     '''File or directory does not exist.'''
 
     def test(self, handler):
-        return not os.path.exists(handler.full_path)
+        filepath = handler.full_path.split("?",1)
+        path = filepath[0]
+        return not os.path.exists(path)
 
     def act(self, handler):
         raise ServerException("'{0}' not found".format(handler.path))
 
 #-------------------------------------------------------------------------------
 
+import subprocess
+from subprocess import Popen
+
+
 class case_cgi_file(base_case):
     '''Something runnable.'''
 
     def run_cgi(self, handler):
         cmd = "python " + handler.full_path
-        child_stdin, child_stdout = os.popen2(cmd)
-        child_stdin.close()
-        data = child_stdout.read()
-        child_stdout.close()
-        handler.send_content(data)
+        # child_stdin, child_stdout = os.popen2(cmd)
+        # child_stdin.close()
+        # data = child_stdout.read()
+        # child_stdout.close()
+        p = Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+        data, errors = p.communicate()
+        handler.send_content(data.encode('utf-8'))
 
     def test(self, handler):
-        return os.path.isfile(handler.full_path) and \
-               handler.full_path.endswith('.py')
+        filepath = handler.full_path.split("?", 1)
+        path = filepath[0]
+        return os.path.isfile(path) and \
+               path.endswith('.py')
 
     def act(self, handler):
         self.run_cgi(handler)
@@ -188,7 +198,6 @@ class RequestHandler(CGIHTTPRequestHandler):
             # Figure out how to handle it.
             for case in self.Cases:
                 if case.test(self):
-                    logger.info("Active Thread Count %s ", threading.active_count())
                     case.act(self)
                     break
 
