@@ -1,7 +1,7 @@
-127.0.0.1 - - [21/May/2020 09:32:56] "GET / HTTP/1.1" 200 -
-er...
+127.0.0.1 - - [21/May/2020 09:58:52] "GET / HTTP/1.1" 200 -
+r...
 
-2020-05-21 09:32:56,172 - server.py - INFO - 
+2020-05-21 09:58:52,681 - __main__ - INFO - 
 GET / HTTP/1.1
 Path: /
 Headers:
@@ -10,9 +10,9 @@ User-Agent: curl/7.55.1
 Accept: */*
 
 
-2020-05-21 09:32:56,172 - server.py - INFO - Active Thread Count 2 
-2020-05-21 09:32:56,174 - server.py - INFO - send_content...
+2020-05-21 09:58:52,683 - __main__ - INFO - Active Thread Count 2 
+2020-05-21 09:58:52,685 - __main__ - INFO - send_content...
 
-2020-05-21 09:32:56,175 - server.py - INFO - Response,
+2020-05-21 09:58:52,685 - __main__ - INFO - Response,
 Body: b'<html>\r\n<head>\r\n<title>Index Page</title>\r\n</head>\r\n<body>\r\n<h1>Index Page</h1>\r\n<p>Welcome to our directory.</p>\r\n</body>\r\n</html>\r\n'
 

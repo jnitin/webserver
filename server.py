@@ -9,8 +9,8 @@ import subprocess
 cgitb.enable() # enable CGI error reporting
 
 LOG_FILENAME = "webserverlog.txt"
-logger = logging.getLogger('server.py')
-logger.setLevel(logging.INFO)
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 # create console handler and set level to debug
 ch = logging.FileHandler(filename=LOG_FILENAME)
 # create formatter
