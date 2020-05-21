@@ -4,7 +4,7 @@ import threading
 import logging
 from sys import argv
 import cgitb
-import subprocess
+from io import BytesIO
 
 cgitb.enable() # enable CGI error reporting
 
@@ -68,14 +68,10 @@ class case_cgi_file(base_case):
 
     def run_cgi(self, handler):
         cmd = "python " + handler.full_path
-        # child_stdin, child_stdout = os.popen2(cmd)
-        # child_stdin.close()
-        p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        data =  p.stdout.read()
-            # print
-            # line,
-        # data = child_stdout.read()
-        # child_stdout.close()
+        child_stdin, child_stdout = os.popen2(cmd)
+        child_stdin.close()
+        data = child_stdout.read()
+        child_stdout.close()
         handler.send_content(data)
 
     def test(self, handler):
@@ -201,11 +197,36 @@ class RequestHandler(CGIHTTPRequestHandler):
             logger.info('Exception Occured...\n')
             self.handle_error(msg)
 
+    def do_POST(self):
+        content_length = int(self.headers['Content-Length'])
+        body = self.rfile.read(content_length)
+        self.send_response(200)
+        self.end_headers()
+        response = BytesIO()
+        response.write(b'This is POST request. ')
+        response.write(b'Received: ')
+        response.write(body)
+        self.wfile.write(response.getvalue())
 
     def do_PUT(self):
-        logger.info('PUT Request...\n')
-        self.do_POST()
+        """Save a file following a HTTP PUT request"""
+        filename = os.path.basename(self.path)
 
+        # Don't overwrite files
+        if os.path.exists(filename):
+            self.send_response(409, 'Conflict')
+            self.end_headers()
+            reply_body = '"%s" already exists\n' % filename
+            self.wfile.write(reply_body.encode('utf-8'))
+            return
+
+        file_length = int(self.headers['Content-Length'])
+        with open(filename, 'wb') as output_file:
+            output_file.write(self.rfile.read(file_length))
+        self.send_response(201, 'Created')
+        self.end_headers()
+        reply_body = 'Saved "%s"\n' % filename
+        self.wfile.write(reply_body.encode('utf-8'))
 
     # Handle unknown objects.
     def handle_error(self, msg):
