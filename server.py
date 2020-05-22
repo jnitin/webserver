@@ -6,6 +6,8 @@ import cgitb
 from io import BytesIO
 import subprocess
 from subprocess import Popen
+import threading
+import time
 
 
 cgitb.enable() # enable CGI error reporting
@@ -201,6 +203,7 @@ class RequestHandler(CGIHTTPRequestHandler):
 
     # Classify and handle request.
     def do_GET(self):
+        logger.info("Thread Count :%s ",threading.active_count())
         logger.info("\n%s\nPath: %s\nHeaders:\n%s",str(self.requestline), str(self.path), str(self.headers))
         try:
 
