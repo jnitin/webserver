@@ -7,10 +7,6 @@ from io import BytesIO
 import subprocess
 from subprocess import Popen
 import threading
-import time
-
-
-cgitb.enable() # enable CGI error reporting
 
 LOG_FILENAME = "webserverlog.txt"
 logger = logging.getLogger(__name__)
@@ -70,30 +66,22 @@ class case_no_file(base_case):
 #-------------------------------------------------------------------------------
 
 
-
-
 class case_cgi_file(base_case):
     '''Something runnable.'''
 
     def run_cgi(self, handler):
         cmd = "python " + handler.full_path
-        # child_stdin, child_stdout = os.popen2(cmd)
-        # child_stdin.close()
-        # data = child_stdout.read()
-        # child_stdout.close()
-        p = Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
-        # p = Popen(['python', handler.full_path], stdout=subprocess.PIPE, bufsize=0)
-        data, errors = p.communicate()
-        handler.send_content(data.encode('utf-8'))
+        child_stdin, child_stdout = os.popen2(cmd)
+        child_stdin.close()
+        data = child_stdout.read()
+        child_stdout.close()
+        handler.send_content(data)
 
     def test(self, handler):
-        filepath = handler.full_path.split("?", 1)
-        path = filepath[0]
-        return os.path.isfile(path) and \
-               path.endswith('.py')
+        return handler.is_cgi()
 
     def act(self, handler):
-        self.run_cgi(handler)
+        handler.run_cgi()
 
 #-------------------------------------------------------------------------------
 
@@ -264,7 +252,11 @@ class RequestHandler(CGIHTTPRequestHandler):
     def send_content(self, content, status=200):
         logger.info('send_content...\n')
         self.send_response(status)
-        self.send_header("Content-type", self.guess_type(path=self.full_path))
+        ctype  = self.guess_type(path=self.full_path)
+        if ctype == 'application/octet-stream':
+            ctype = 'text/html'
+        self.send_header("Content-type", ctype)
+        # self.send_header("Content-type", 'text/html')
         self.send_header("Content-Length", str(len(content)))
         self.end_headers()
         self.wfile.write(content)
