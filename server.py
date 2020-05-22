@@ -260,8 +260,6 @@ class RequestHandler(CGIHTTPRequestHandler):
         self.send_header("Content-Length", str(len(content)))
         self.end_headers()
         self.wfile.write(content)
-        logger.info("Response,\nBody: %s\n", str(content))
-
 
 
     def log_message(self, format, *args):
