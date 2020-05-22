@@ -2,10 +2,7 @@ import os
 from http.server import CGIHTTPRequestHandler , ThreadingHTTPServer
 import logging
 from sys import argv
-import cgitb
 from io import BytesIO
-import subprocess
-from subprocess import Popen
 import threading
 
 LOG_FILENAME = "webserverlog.txt"
@@ -256,7 +253,6 @@ class RequestHandler(CGIHTTPRequestHandler):
         if ctype == 'application/octet-stream':
             ctype = 'text/html'
         self.send_header("Content-type", ctype)
-        # self.send_header("Content-type", 'text/html')
         self.send_header("Content-Length", str(len(content)))
         self.end_headers()
         self.wfile.write(content)
