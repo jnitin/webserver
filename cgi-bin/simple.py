@@ -1,9 +1,8 @@
-#!/usr/bin/env python3.8.3
+#!F:\Python\Pycharm_Program\venv\Scripts\python.exe
 from datetime import datetime
 import cgitb
 
-
-cgitb.enable()		## allows for debugging errors from the cgi scripts in the browser
+cgitb.enable()
 
 print('''\
 <html>

@@ -1,4 +1,4 @@
-# coding: utf-8
+#!F:\Python\Pycharm_Program\venv\Scripts\python.exe
 
 import cgi, os
 import cgitb; cgitb.enable()

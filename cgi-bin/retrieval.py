@@ -1,22 +1,23 @@
-#!/usr/bin/env python3.8.3
+#!F:\Python\Pycharm_Program\venv\Scripts\python.exe
 
 import cgi, cgitb
-cgitb.enable()		## allows for debugging errors from the cgi scripts in the browser
+cgitb.enable()
 
 form = cgi.FieldStorage()
 
-## getting the data from the fields
-first = form.getvalue('username')
-last = form.getvalue('password')
-
+# getting the data from the fields
+username = form.getvalue('username')
+password = form.getvalue('password')
+if password is None:
+    password = '123'
 
 print("Content-type:text/html\r\n\r\n")
 print("<html>")
 print("<head><title>User entered</title></head>")
 print("<body>")
 print("<h1>User has entered</h1>")
-print("<b>Firstname : </b>" + first + "<br>")
-print("<br><b>Lastname : </b>" + last + "<br>")
+print("<b>Username : </b>", username, "<br>")
+print("<b>Password : </b>", password, "<br>")
 print("")
 print("</div>")
 print("</body>")

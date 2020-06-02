@@ -1,5 +1,5 @@
 import os
-from http.server import CGIHTTPRequestHandler , ThreadingHTTPServer
+from http.server import CGIHTTPRequestHandler, ThreadingHTTPServer
 import logging
 from sys import argv
 from io import BytesIO
@@ -41,6 +41,12 @@ class base_case(object):
     def index_path(self, handler):
         return os.path.join(handler.full_path, 'index.html')
 
+    def forms_path(self, handler):
+        return os.path.join(handler.full_path, 'forms.html')
+
+    def form_get_path(self, handler):
+        return os.path.join(handler.full_path, 'form_get.html')
+
     def test(self, handler):
         assert False, 'Not implemented.'
 
@@ -53,11 +59,13 @@ class case_no_file(base_case):
     '''File or directory does not exist.'''
 
     def test(self, handler):
-        filepath = handler.full_path.split("?",1)
+        filepath = handler.full_path.split("?", 1)
+        print("Path case_no_file : ", filepath)
         path = filepath[0]
         return not os.path.exists(path)
 
     def act(self, handler):
+        print("Path case_no_file : ", handler.full_path)
         raise ServerException("'{0}' not found".format(handler.path))
 
 #-------------------------------------------------------------------------------
@@ -67,8 +75,9 @@ class case_cgi_file(base_case):
     '''Something runnable.'''
 
     def run_cgi(self, handler):
+        print("Path cgi : ", handler.full_path)
         cmd = "python " + handler.full_path
-        child_stdin, child_stdout = os.popen2(cmd)
+        child_stdin, child_stdout = os.popen(cmd)
         child_stdin.close()
         data = child_stdout.read()
         child_stdout.close()
@@ -150,10 +159,8 @@ class case_always_fail(base_case):
 #-------------------------------------------------------------------------------
 
 class RequestHandler(CGIHTTPRequestHandler):
-    '''
-    If the requested path maps to a file, that file is served.
-    If anything goes wrong, an error page is constructed.
-    '''
+    """If the requested path maps to a file, that file is served.
+    If anything goes wrong, an error page is constructed."""
 
     protocol_version = 'HTTP/1.1'
 
@@ -178,9 +185,7 @@ class RequestHandler(CGIHTTPRequestHandler):
         """
 
     def guess_type(self, path):
-        mimetype = CGIHTTPRequestHandler.guess_type(
-            self, path
-        )
+        mimetype = CGIHTTPRequestHandler.guess_type(self, path)
         if mimetype == 'application/octet-stream':
             if path.endswith('manifest'):
                 mimetype = 'text/cache-manifest'
@@ -188,10 +193,10 @@ class RequestHandler(CGIHTTPRequestHandler):
 
     # Classify and handle request.
     def do_GET(self):
-        logger.info("Thread Count :%s ",threading.active_count())
-        logger.info("\n%s\nPath: %s\nHeaders:\n%s",str(self.requestline), str(self.path), str(self.headers))
+        logger.info("Thread Count :%s ", threading.active_count())
+        logger.info("\n%s\nPath: %s\nHeaders:\n%s", str(self.requestline), str(self.path), str(self.headers))
         try:
-
+            print("Get method call")
             # Figure out what exactly is being requested.
             self.full_path = os.getcwd() + self.path
 
@@ -208,6 +213,7 @@ class RequestHandler(CGIHTTPRequestHandler):
 
     def do_POST(self):
         logger.info("\n%s\nPath: %s\nHeaders:\n%s", str(self.requestline), str(self.path), str(self.headers))
+        print("Post method call")
         content_length = int(self.headers['Content-Length'])
         body = self.rfile.read(content_length)
         self.send_response(200)
@@ -217,6 +223,7 @@ class RequestHandler(CGIHTTPRequestHandler):
         response.write(b'Received: ')
         response.write(body)
         self.wfile.write(response.getvalue())
+        self.close_connection = True
 
     def do_PUT(self):
         logger.info("\n%s\nPath: %s\nHeaders:\n%s", str(self.requestline), str(self.path), str(self.headers))
@@ -224,12 +231,12 @@ class RequestHandler(CGIHTTPRequestHandler):
         filename = os.path.basename(self.path)
 
         # Don't overwrite files
-        if os.path.exists(filename):
-            self.send_response(409, 'Conflict')
-            self.end_headers()
-            reply_body = '"%s" already exists\n' % filename
-            self.wfile.write(reply_body.encode('utf-8'))
-            return
+        #if os.path.exists(filename):
+            #self.send_response(409, 'Conflict')
+            #self.end_headers()
+            #reply_body = '"%s" already exists\n' % filename
+            #self.wfile.write(reply_body.encode('utf-8'))
+            #return
 
         file_length = int(self.headers['Content-Length'])
         with open(filename, 'wb') as output_file:
@@ -238,6 +245,7 @@ class RequestHandler(CGIHTTPRequestHandler):
         self.end_headers()
         reply_body = 'Saved "%s"\n' % filename
         self.wfile.write(reply_body.encode('utf-8'))
+        self.close_connection = True
 
     # Handle unknown objects.
     def handle_error(self, msg):
@@ -257,16 +265,15 @@ class RequestHandler(CGIHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(content)
 
-
     def log_message(self, format, *args):
         self.log_file.write("%s - - [%s] %s\n" %
                             (self.client_address[0],
                              self.log_date_time_string(),
                              format % args))
 
-
 #-------------------------------------------------------------------------------
-def run(server_class=ThreadingHTTPServer, handler_class=RequestHandler, port=8080):
+
+def run(server_class = ThreadingHTTPServer, handler_class = RequestHandler, port = 8080):
     server_address = ('', port)
     server = server_class(server_address, handler_class)
     logger.info('Starting webserver...\n')
