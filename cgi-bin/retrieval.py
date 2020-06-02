@@ -9,6 +9,7 @@ form = cgi.FieldStorage()
 username = form.getvalue('username')
 password = form.getvalue('password')
 if password is None:
+    username = 'user'
     password = '123'
 
 print("Content-type:text/html\r\n\r\n")

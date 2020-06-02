@@ -20,18 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ba33aee-9a3f-4394-8ac3-85201710c6b9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/cgi-bin/retrieval_get.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/form_get.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webserver.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webserver.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cgi-bin/hello.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cgi-bin/retrieval.py" beforeDir="false" afterPath="$PROJECT_DIR$/cgi-bin/retrieval.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cgi-bin/save_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/cgi-bin/save_file.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cgi-bin/simple.py" beforeDir="false" afterPath="$PROJECT_DIR$/cgi-bin/simple.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plain.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webserverlog.txt" beforeDir="false" afterPath="$PROJECT_DIR$/webserverlog.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,17 +197,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/server.py</url>
-          <line>257</line>
+          <line>258</line>
           <option name="timeStamp" value="97" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/server.py</url>
-          <line>251</line>
+          <line>252</line>
           <option name="timeStamp" value="98" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/server.py</url>
-          <line>228</line>
+          <line>229</line>
           <option name="timeStamp" value="99" />
         </line-breakpoint>
       </breakpoints>
