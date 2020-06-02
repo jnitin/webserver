@@ -1,6 +1,5 @@
 # coding: utf-8
-
-import cgi, os
+import cgi
 import cgitb; cgitb.enable()
 
 form = cgi.FieldStorage()
@@ -10,10 +9,9 @@ fileitem = form['filename']
 
 # Test if file uploaded
 if fileitem.filename:
-    message = 'ok'   
+    message = 'ok'
 else:
     message = 'No file was uploaded'
-
 
 print("Content-type: text/html")
 print("")

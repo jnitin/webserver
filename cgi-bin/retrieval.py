@@ -1,14 +1,15 @@
 #!/usr/bin/env python3.8.3
 
-import cgi, cgitb
-cgitb.enable()		## allows for debugging errors from the cgi scripts in the browser
+import cgi
+import cgitb
+
+cgitb.enable()  # allows for debugging errors from the cgi scripts in the browser
 
 form = cgi.FieldStorage()
 
-## getting the data from the fields
+# getting the data from the fields
 first = form.getvalue('username')
 last = form.getvalue('password')
-
 
 print("Content-type:text/html\r\n\r\n")
 print("<html>")
