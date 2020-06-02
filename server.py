@@ -216,6 +216,7 @@ class RequestHandler(CGIHTTPRequestHandler):
         print("Post method call")
         content_length = int(self.headers['Content-Length'])
         body = self.rfile.read(content_length)
+        logger.info(str(body))
         self.send_response(200)
         self.end_headers()
         response = BytesIO()
