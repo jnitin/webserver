@@ -1,4 +1,4 @@
-#!F:\Python\Pycharm_Program\venv\Scripts\python.exe
+#!/user/bin/evn python3.8.3
 
 import cgi, os
 import cgitb; cgitb.enable()

@@ -1,4 +1,5 @@
-#!F:\Python\Pycharm_Program\venv\Scripts\python.exe
+#!/user/bin/evn python3.8.3
+
 from datetime import datetime
 import cgitb
 
