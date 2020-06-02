@@ -210,6 +210,7 @@ class RequestHandler(CGIHTTPRequestHandler):
         logger.info("\n%s\nPath: %s\nHeaders:\n%s", str(self.requestline), str(self.path), str(self.headers))
         content_length = int(self.headers['Content-Length'])
         body = self.rfile.read(content_length)
+        logger.info(str(body))
         self.send_response(200)
         self.end_headers()
         response = BytesIO()
@@ -217,6 +218,7 @@ class RequestHandler(CGIHTTPRequestHandler):
         response.write(b'Received: ')
         response.write(body)
         self.wfile.write(response.getvalue())
+        self.close_connection = True
 
     def do_PUT(self):
         logger.info("\n%s\nPath: %s\nHeaders:\n%s", str(self.requestline), str(self.path), str(self.headers))
@@ -238,6 +240,7 @@ class RequestHandler(CGIHTTPRequestHandler):
         self.end_headers()
         reply_body = 'Saved "%s"\n' % filename
         self.wfile.write(reply_body.encode('utf-8'))
+        self.close_connection = True
 
     # Handle unknown objects.
     def handle_error(self, msg):
