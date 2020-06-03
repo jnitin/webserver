@@ -1,5 +1,5 @@
 #!/user/bin/evn python3.8.3
-
+"""This is simple module"""
 from datetime import datetime
 import cgitb
 

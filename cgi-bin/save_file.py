@@ -1,11 +1,10 @@
+"""This is save file module"""
 import cgi
 import cgitb
 
 cgitb.enable()
 
 form = cgi.FieldStorage()
-
-# Get filename
 fileItem = form['filename']
 
 # Test if file uploaded

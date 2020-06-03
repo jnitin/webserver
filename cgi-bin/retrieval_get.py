@@ -1,5 +1,5 @@
 #!/user/bin/evn python3.8.3
-
+"""This is get method retrieval module"""
 import cgi
 import cgitb
 
