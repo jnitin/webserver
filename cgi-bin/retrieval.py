@@ -1,7 +1,9 @@
 #!/user/bin/evn python3.8.3
 
-import cgi, cgitb
-cgitb.enable()
+import cgi
+import cgitb
+
+cgitb.enable()  # allows for debugging errors from the cgi scripts in the browser
 
 form = cgi.FieldStorage()
 

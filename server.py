@@ -18,18 +18,22 @@ ch.setFormatter(formatter)
 logger.addHandler(ch)
 
 
-#-------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 
 class ServerException(Exception):
-    '''For internal error reporting.'''
+    """For internal error reporting."""
     pass
 
-#-------------------------------------------------------------------------------
 
-class base_case(object):
-    '''Parent for case handlers.'''
+# -------------------------------------------------------------------------------
 
-    def handle_file(self, handler, full_path):
+
+class base_Case(object):
+    """Parent for case handlers."""
+
+    @staticmethod
+    def handle_file(handler, full_path):
+
         try:
             with open(full_path, 'rb') as reader:
                 content = reader.read()
@@ -38,7 +42,8 @@ class base_case(object):
             msg = "'{0}' cannot be read: {1}".format(full_path, msg)
             handler.handle_error(msg)
 
-    def index_path(self, handler):
+    @staticmethod
+    def index_path(handler):
         return os.path.join(handler.full_path, 'index.html')
 
     def forms_path(self, handler):
@@ -53,10 +58,10 @@ class base_case(object):
     def act(self, handler):
         assert False, 'Not implemented.'
 
-#-------------------------------------------------------------------------------
 
-class case_no_file(base_case):
-    '''File or directory does not exist.'''
+# -------------------------------------------------------------------------------
+class case_no_file(base_Case):
+    """File or directory does not exist."""
 
     def test(self, handler):
         filepath = handler.full_path.split("?", 1)
@@ -68,11 +73,9 @@ class case_no_file(base_case):
         print("Path case_no_file : ", handler.full_path)
         raise ServerException("'{0}' not found".format(handler.path))
 
-#-------------------------------------------------------------------------------
 
+# -------------------------------------------------------------------------------
 
-class case_cgi_file(base_case):
-    '''Something runnable.'''
 
     def run_cgi(self, handler):
         print("Path cgi : ", handler.full_path)
@@ -89,10 +92,12 @@ class case_cgi_file(base_case):
     def act(self, handler):
         handler.run_cgi()
 
-#-------------------------------------------------------------------------------
 
-class case_existing_file(base_case):
-    '''File exists.'''
+# -------------------------------------------------------------------------------
+
+
+class case_existing_file(base_Case):
+    """File exists."""
 
     def test(self, handler):
         return os.path.isfile(handler.full_path)
@@ -100,10 +105,12 @@ class case_existing_file(base_case):
     def act(self, handler):
         self.handle_file(handler, handler.full_path)
 
-#-------------------------------------------------------------------------------
 
-class case_directory_index_file(base_case):
-    '''Serve index.html page for a directory.'''
+# -------------------------------------------------------------------------------
+
+
+class case_directory_index_file(base_Case):
+    """Serve index.html page for a directory."""
 
     def test(self, handler):
         return os.path.isdir(handler.full_path) and \
@@ -112,10 +119,11 @@ class case_directory_index_file(base_case):
     def act(self, handler):
         self.handle_file(handler, self.index_path(handler))
 
-#-------------------------------------------------------------------------------
 
-class case_directory_no_index_file(base_case):
-    '''Serve listing for a directory without an index.html page.'''
+# -------------------------------------------------------------------------------
+
+class case_directory_no_index_file(base_Case):
+    """Serve listing for a directory without an index.html page."""
 
     # How to display a directory listing.
     Listing_Page = '''\
@@ -145,10 +153,12 @@ class case_directory_no_index_file(base_case):
     def act(self, handler):
         self.list_dir(handler, handler.full_path)
 
-#-------------------------------------------------------------------------------
 
-class case_always_fail(base_case):
-    '''Base case if nothing else worked.'''
+# ------------------------------------------------------------------------------
+
+
+class case_always_fail(base_Case):
+    """Base case if nothing else worked."""
 
     def test(self, handler):
         return True
@@ -156,7 +166,12 @@ class case_always_fail(base_case):
     def act(self, handler):
         raise ServerException("Unknown object '{0}'".format(handler.path))
 
-#-------------------------------------------------------------------------------
+
+# -------------------------------------------------------------------------------
+
+
+# noinspection PyAttributeOutsideInit
+
 
 class RequestHandler(CGIHTTPRequestHandler):
     """If the requested path maps to a file, that file is served.
@@ -192,6 +207,7 @@ class RequestHandler(CGIHTTPRequestHandler):
         return mimetype
 
     # Classify and handle request.
+
     def do_GET(self):
         logger.info("Thread Count :%s ", threading.active_count())
         logger.info("\n%s\nPath: %s\nHeaders:\n%s", str(self.requestline), str(self.path), str(self.headers))
@@ -226,7 +242,7 @@ class RequestHandler(CGIHTTPRequestHandler):
         self.wfile.write(response.getvalue())
         self.close_connection = True
 
-    def do_PUT(self):
+    def do_put(self):
         logger.info("\n%s\nPath: %s\nHeaders:\n%s", str(self.requestline), str(self.path), str(self.headers))
         """Save a file following a HTTP PUT request"""
         filename = os.path.basename(self.path)
@@ -258,7 +274,7 @@ class RequestHandler(CGIHTTPRequestHandler):
     def send_content(self, content, status=200):
         logger.info('send_content...\n')
         self.send_response(status)
-        ctype  = self.guess_type(path=self.full_path)
+        ctype = self.guess_type(path=self.full_path)
         if ctype == 'application/octet-stream':
             ctype = 'text/html'
         self.send_header("Content-type", ctype)
@@ -272,9 +288,9 @@ class RequestHandler(CGIHTTPRequestHandler):
                              self.log_date_time_string(),
                              format % args))
 
-#-------------------------------------------------------------------------------
 
-def run(server_class = ThreadingHTTPServer, handler_class = RequestHandler, port = 8080):
+# -------------------------------------------------------------------------------
+def run(server_class=ThreadingHTTPServer, handler_class=RequestHandler, port=8080):
     server_address = ('', port)
     server = server_class(server_address, handler_class)
     logger.info('Starting webserver...\n')
@@ -284,6 +300,7 @@ def run(server_class = ThreadingHTTPServer, handler_class = RequestHandler, port
         pass
     server.server_close()
     logger.info('Stopping webserver...\n')
+
 
 if __name__ == '__main__':
     if len(argv) == 2:
