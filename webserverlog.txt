@@ -1,9 +1,9 @@
-127.0.0.1 - - [03/Jun/2020 19:28:59] "GET /forms.html HTTP/1.1" 200 -
-127.0.0.1 - - [03/Jun/2020 19:28:59] "GET /favicon.ico HTTP/1.1" 200 -
-127.0.0.1 - - [03/Jun/2020 19:29:09] "GET /cgi-bin/retrieval.py?username=jnitin&password=1234 HTTP/1.1" 200 -
-127.0.0.1 - - [03/Jun/2020 19:29:09] command: C:\Users\BGH20228.AD\AppData\Local\Continuum\anaconda3\envs\webserver\python.exe -u D:\workspace\certification\pythoncertification\source\webserver\cgi-bin\retrieval.py
-127.0.0.1 - - [03/Jun/2020 19:29:10] CGI script exited OK
-e/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+127.0.0.1 - - [03/Jun/2020 19:35:49] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2020 19:35:52] "GET /forms.html HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2020 19:35:58] "GET /cgi-bin/retrieval.py?username=2017HE12502%40wilp.bits-pilani.ac.in&password=ssss HTTP/1.1" 200 -
+127.0.0.1 - - [03/Jun/2020 19:35:58] command: C:\Users\BGH20228.AD\AppData\Local\Continuum\anaconda3\envs\webserver\python.exe -u D:\workspace\certification\pythoncertification\source\webserver\cgi-bin\retrieval.py
+127.0.0.1 - - [03/Jun/2020 19:36:00] CGI script exited OK
+9
 Sec-Fetch-Site: none
 Sec-Fetch-Mode: navigate
 Sec-Fetch-User: ?1
@@ -12,33 +12,33 @@ Accept-Encoding: gzip, deflate, br
 Accept-Language: en-US,en;q=0.9
 
 
-2020-06-03 19:28:59,706 - __main__ - INFO - send_content...
+2020-06-03 19:35:49,533 - __main__ - INFO - send_content...
 
-2020-06-03 19:28:59,762 - __main__ - INFO - Thread Count :3 
-2020-06-03 19:28:59,763 - __main__ - INFO - 
-GET /favicon.ico HTTP/1.1
-Path: /favicon.ico
+2020-06-03 19:35:52,544 - __main__ - INFO - Thread Count :3 
+2020-06-03 19:35:52,544 - __main__ - INFO - 
+GET /forms.html HTTP/1.1
+Path: /forms.html
 Headers:
 Host: 127.0.0.1:8080
 Connection: keep-alive
-Pragma: no-cache
-Cache-Control: no-cache
+Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36
-Accept: image/webp,image/apng,image/*,*/*;q=0.8
-Sec-Fetch-Site: same-origin
-Sec-Fetch-Mode: no-cors
-Sec-Fetch-Dest: empty
-Referer: http://127.0.0.1:8080/forms.html
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Purpose: prefetch
+Sec-Fetch-Site: none
+Sec-Fetch-Mode: navigate
+Sec-Fetch-User: ?1
+Sec-Fetch-Dest: document
 Accept-Encoding: gzip, deflate, br
 Accept-Language: en-US,en;q=0.9
 
 
-2020-06-03 19:28:59,764 - __main__ - INFO - send_content...
+2020-06-03 19:35:52,546 - __main__ - INFO - send_content...
 
-2020-06-03 19:29:09,205 - __main__ - INFO - Thread Count :3 
-2020-06-03 19:29:09,207 - __main__ - INFO - 
-GET /cgi-bin/retrieval.py?username=jnitin&password=1234 HTTP/1.1
-Path: /cgi-bin/retrieval.py?username=jnitin&password=1234
+2020-06-03 19:35:58,765 - __main__ - INFO - Thread Count :3 
+2020-06-03 19:35:58,766 - __main__ - INFO - 
+GET /cgi-bin/retrieval.py?username=2017HE12502%40wilp.bits-pilani.ac.in&password=ssss HTTP/1.1
+Path: /cgi-bin/retrieval.py?username=2017HE12502%40wilp.bits-pilani.ac.in&password=ssss
 Headers:
 Host: 127.0.0.1:8080
 Connection: keep-alive
