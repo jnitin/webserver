@@ -1,6 +1,7 @@
-
 import cgi
-import cgitb; cgitb.enable()
+import cgitb
+
+cgitb.enable()
 
 form = cgi.FieldStorage()
 

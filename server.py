@@ -46,10 +46,12 @@ class base_Case(object):
     def index_path(handler):
         return os.path.join(handler.full_path, 'index.html')
 
-    def forms_path(self, handler):
+    @staticmethod
+    def forms_path(handler):
         return os.path.join(handler.full_path, 'forms.html')
 
-    def form_get_path(self, handler):
+    @staticmethod
+    def form_get_path(handler):
         return os.path.join(handler.full_path, 'form_get.html')
 
     def test(self, handler):
@@ -78,7 +80,8 @@ class case_no_file(base_Case):
 class case_cgi_file(base_Case):
     """cgi file exists"""
 
-    def run_cgi(self, handler):
+    @staticmethod
+    def run_cgi(handler):
         print("Path cgi : ", handler.full_path)
         cmd = "python " + handler.full_path
         child_stdin, child_stdout = os.popen(cmd)
