@@ -1,3 +1,4 @@
+"""This is main server file"""
 import os
 from http.server import CGIHTTPRequestHandler, ThreadingHTTPServer
 import logging
@@ -24,15 +25,15 @@ class ServerException(Exception):
     """For internal error reporting."""
     pass
 
-
 # -------------------------------------------------------------------------------
 
 
-class base_Case(object):
+class BaseCase:
     """Parent for case handlers."""
 
     @staticmethod
     def handle_file(handler, full_path):
+        """This is static hanle file method with two args as handler and full_path"""
 
         try:
             with open(full_path, 'rb') as reader:
@@ -44,45 +45,48 @@ class base_Case(object):
 
     @staticmethod
     def index_path(handler):
+        """This is static index path method with one args as handler"""
         return os.path.join(handler.full_path, 'index.html')
 
     @staticmethod
     def forms_path(handler):
+        """This is static forms path method with one args as handler"""
         return os.path.join(handler.full_path, 'forms.html')
 
     @staticmethod
     def form_get_path(handler):
+        """This is static form get path method with one args as handler"""
         return os.path.join(handler.full_path, 'form_get.html')
 
     def test(self, handler):
-        assert False, 'Not implemented.'
+        """This is test method with one args as handler"""
+        print("This will override from child classes", handler.full_path)
 
     def act(self, handler):
-        assert False, 'Not implemented.'
+        """This is act method with one args as handler"""
+        print("This will override from child classes", handler.full_path)
 
 
 # -------------------------------------------------------------------------------
-class case_no_file(base_Case):
+class CaseNoFile(BaseCase):
     """File or directory does not exist."""
 
     def test(self, handler):
-        filepath = handler.full_path.split("?", 1)
-        print("Path case_no_file : ", filepath)
-        path = filepath[0]
+        file_ath = handler.full_path.split("?", 1)
+        path = file_ath[0]
         return not os.path.exists(path)
 
     def act(self, handler):
-        print("Path case_no_file : ", handler.full_path)
         raise ServerException("'{0}' not found".format(handler.path))
 
 
 # -------------------------------------------------------------------------------
-class case_cgi_file(base_Case):
+class CaseCgiFile(BaseCase):
     """cgi file exists"""
 
     @staticmethod
     def run_cgi(handler):
-        print("Path cgi : ", handler.full_path)
+        """This is static run_cgi method with one args as handler"""
         cmd = "python " + handler.full_path
         child_stdin, child_stdout = os.popen(cmd)
         child_stdin.close()
@@ -100,7 +104,7 @@ class case_cgi_file(base_Case):
 # -------------------------------------------------------------------------------
 
 
-class case_existing_file(base_Case):
+class CaseExistingFile(BaseCase):
     """File exists."""
 
     def test(self, handler):
@@ -109,11 +113,10 @@ class case_existing_file(base_Case):
     def act(self, handler):
         self.handle_file(handler, handler.full_path)
 
-
 # -------------------------------------------------------------------------------
 
 
-class case_directory_index_file(base_Case):
+class CaseDirectoryIndexFile(BaseCase):
     """Serve index.html page for a directory."""
 
     def test(self, handler):
@@ -126,7 +129,7 @@ class case_directory_index_file(base_Case):
 
 # -------------------------------------------------------------------------------
 
-class case_directory_no_index_file(base_Case):
+class CaseDirectoryNoIndexFile(BaseCase):
     """Serve listing for a directory without an index.html page."""
 
     # How to display a directory listing.
@@ -141,6 +144,7 @@ class case_directory_no_index_file(base_Case):
         '''
 
     def list_dir(self, handler, full_path):
+        """This is list_dir method with two args as handler and full_path"""
         try:
             entries = os.listdir(full_path)
             bullets = ['<li>{0}</li>'.format(e) for e in entries if not e.startswith('.')]
@@ -161,7 +165,7 @@ class case_directory_no_index_file(base_Case):
 # ------------------------------------------------------------------------------
 
 
-class case_always_fail(base_Case):
+class CaseAlwaysFail(BaseCase):
     """Base case if nothing else worked."""
 
     def test(self, handler):
@@ -186,12 +190,12 @@ class RequestHandler(CGIHTTPRequestHandler):
     buffer = 1
     log_file = open(LOG_FILENAME, 'w', buffer)
 
-    Cases = [case_no_file(),
-             case_cgi_file(),
-             case_existing_file(),
-             case_directory_index_file(),
-             case_directory_no_index_file(),
-             case_always_fail()]
+    Cases = [CaseNoFile(),
+             CaseCgiFile(),
+             CaseExistingFile(),
+             CaseDirectoryIndexFile(),
+             CaseDirectoryNoIndexFile(),
+             CaseAlwaysFail()]
 
     # How to display an error.
     Error_Page = """\
@@ -214,25 +218,24 @@ class RequestHandler(CGIHTTPRequestHandler):
 
     def do_GET(self):
         logger.info("Thread Count :%s ", threading.active_count())
-        logger.info("\n%s\nPath: %s\nHeaders:\n%s", str(self.requestline), str(self.path), str(self.headers))
+        logger.info("\n%s\nPath: %s\nHeaders:\n%s",
+                    str(self.requestline), str(self.path), str(self.headers))
         try:
             print("Get method call")
-            # Figure out what exactly is being requested.
             self.full_path = os.getcwd() + self.path
 
-            # Figure out how to handle it.
             for case in self.Cases:
                 if case.test(self):
                     case.act(self)
                     break
 
-        # Handle errors.
         except Exception as msg:
-            logger.info('Exception Occured...\n')
+            logger.info("Exception occurred :", msg)
             self.handle_error(msg)
 
     def do_POST(self):
-        logger.info("\n%s\nPath: %s\nHeaders:\n%s", str(self.requestline), str(self.path), str(self.headers))
+        logger.info("\n%s\nPath: %s\nHeaders:\n%s",
+                    str(self.requestline), str(self.path), str(self.headers))
         print("Post method call")
         content_length = int(self.headers['Content-Length'])
         body = self.rfile.read(content_length)
@@ -247,8 +250,9 @@ class RequestHandler(CGIHTTPRequestHandler):
         self.close_connection = True
 
     def do_put(self):
-        logger.info("\n%s\nPath: %s\nHeaders:\n%s", str(self.requestline), str(self.path), str(self.headers))
-        """Save a file following a HTTP PUT request"""
+        """This is do_PUT method"""
+        logger.info("\n%s\nPath: %s\nHeaders:\n%s",
+                    str(self.requestline), str(self.path), str(self.headers))
         filename = os.path.basename(self.path)
         file_length = int(self.headers['Content-Length'])
         with open(filename, 'wb') as output_file:
@@ -261,12 +265,14 @@ class RequestHandler(CGIHTTPRequestHandler):
 
     # Handle unknown objects.
     def handle_error(self, msg):
+        """This is handler error method with one args as msg"""
         logger.info('handle_error...\n')
         content = self.Error_Page.format(path=self.path, msg=msg)
         self.send_content(content, 404)
 
     # Send actual content.
     def send_content(self, content, status=200):
+        """This is send_content method with two args as content and status"""
         logger.info('send_content...\n')
         self.send_response(status)
         ctype = self.guess_type(path=self.full_path)
@@ -283,9 +289,11 @@ class RequestHandler(CGIHTTPRequestHandler):
                              self.log_date_time_string(),
                              format % args))
 
-
 # -------------------------------------------------------------------------------
+
+
 def run(server_class=ThreadingHTTPServer, handler_class=RequestHandler, port=8080):
+    """This is run method with three args as ThreadingHTTPServer,  RequestHandler, and port"""
     server_address = ('', port)
     server = server_class(server_address, handler_class)
     logger.info('Starting webserver...\n')

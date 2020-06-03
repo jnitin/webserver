@@ -6,10 +6,10 @@ cgitb.enable()
 form = cgi.FieldStorage()
 
 # Get filename
-fileitem = form['filename']
+fileItem = form['filename']
 
 # Test if file uploaded
-if fileitem.filename:
+if fileItem.filename:
     message = 'ok'
 else:
     message = 'No file was uploaded'

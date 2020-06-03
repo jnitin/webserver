@@ -3,7 +3,6 @@
 from datetime import datetime
 import cgitb
 
-
 cgitb.enable()    # Allows for debugging errors from the cgi scripts in the browser
 
 print('''\
