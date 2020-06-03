@@ -1,0 +1,6 @@
+webserverlog*
+
+venv/*
+
+.idea/*
+
