@@ -249,12 +249,12 @@ class RequestHandler(CGIHTTPRequestHandler):
         filename = os.path.basename(self.path)
 
         # Don't overwrite files
-        #if os.path.exists(filename):
-            #self.send_response(409, 'Conflict')
-            #self.end_headers()
-            #reply_body = '"%s" already exists\n' % filename
-            #self.wfile.write(reply_body.encode('utf-8'))
-            #return
+        # if os.path.exists(filename):
+        # self.send_response(409, 'Conflict')
+        # self.end_headers()
+        # reply_body = '"%s" already exists\n' % filename
+        # self.wfile.write(reply_body.encode('utf-8'))
+        # return
 
         file_length = int(self.headers['Content-Length'])
         with open(filename, 'wb') as output_file:
