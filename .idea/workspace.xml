@@ -20,16 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ba33aee-9a3f-4394-8ac3-85201710c6b9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/lenovo.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webserver.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webserver.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cgi-bin/hello.py" beforeDir="false" afterPath="$PROJECT_DIR$/cgi-bin/hello.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cgi-bin/retrieval.py" beforeDir="false" afterPath="$PROJECT_DIR$/cgi-bin/retrieval.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cgi-bin/save_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/cgi-bin/save_file.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/inspections/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/inspections/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plain.html" beforeDir="false" afterPath="$PROJECT_DIR$/plain.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgi-bin/simple.py" beforeDir="false" afterPath="$PROJECT_DIR$/cgi-bin/simple.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webserver.wiki/Home.md" beforeDir="false" afterPath="$PROJECT_DIR$/webserver.wiki/Home.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webserverlog.txt" beforeDir="false" afterPath="$PROJECT_DIR$/webserverlog.txt" afterDir="false" />
@@ -59,6 +51,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TODO_SCOPE" value="All Places" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RunManager">
@@ -123,26 +116,26 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="236" y="0" key="#Intentions/0.0.1280.680@0.0.1280.680" timestamp="1590995504841" />
-    <state x="399" y="210" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1591128747766">
+    <state x="399" y="210" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1591168161807">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="399" y="210" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1280.680@0.0.1280.680" timestamp="1591128747766" />
-    <state width="1259" height="163" key="GridCell.Tab.0.bottom" timestamp="1591128748930">
+    <state x="399" y="210" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1280.680@0.0.1280.680" timestamp="1591168161807" />
+    <state width="1228" height="146" key="GridCell.Tab.0.bottom" timestamp="1591168164129">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1591128748930" />
-    <state width="1259" height="163" key="GridCell.Tab.0.center" timestamp="1591128748930">
+    <state width="1228" height="146" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1591168164129" />
+    <state width="1228" height="146" key="GridCell.Tab.0.center" timestamp="1591168164129">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1591128748930" />
-    <state width="1259" height="163" key="GridCell.Tab.0.left" timestamp="1591128748930">
+    <state width="1228" height="146" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1591168164129" />
+    <state width="1228" height="146" key="GridCell.Tab.0.left" timestamp="1591168164128">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1591128748930" />
-    <state width="1259" height="163" key="GridCell.Tab.0.right" timestamp="1591128748930">
+    <state width="1228" height="146" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1591168164128" />
+    <state width="1228" height="146" key="GridCell.Tab.0.right" timestamp="1591168164129">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1259" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1591128748930" />
+    <state width="1228" height="146" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1591168164129" />
     <state width="1237" height="156" key="GridCell.Tab.1.bottom" timestamp="1590127254763">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -167,18 +160,22 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="205" y="69" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1280.680@0.0.1280.680" timestamp="1590001164373" />
+    <state x="435" y="182" key="scopes" timestamp="1591167356547">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="435" y="182" key="scopes/0.0.1280.680@0.0.1280.680" timestamp="1591167356547" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/server.py</url>
-          <line>138</line>
+          <line>135</line>
           <option name="timeStamp" value="89" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/server.py</url>
-          <line>148</line>
+          <line>144</line>
           <option name="timeStamp" value="90" />
         </line-breakpoint>
       </breakpoints>
