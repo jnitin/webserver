@@ -1,15 +1,2 @@
-127.0.0.1 - - [02/Jun/2020 14:14:21] "POST /data HTTP/1.1" 200 -
+2020-06-03 18:23:15,197 - __main__ - INFO - Starting webserver...
 
-
-2020-06-02 14:14:21,566 - __main__ - INFO - 
-POST /data HTTP/1.1
-Path: /data
-Headers:
-Host: localhost:8080
-User-Agent: curl/7.55.1
-Accept: */*
-Content-Length: 21
-Content-Type: application/x-www-form-urlencoded
-
-
-2020-06-02 14:14:21,566 - __main__ - INFO - b'param1=value1&param2='
