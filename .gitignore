@@ -1,6 +1,6 @@
-webserverlog.txt
+webserverlog*
 
-venv
+venv/*
 
-.idea
+.idea/*
 
