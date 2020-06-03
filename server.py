@@ -75,7 +75,8 @@ class case_no_file(base_Case):
 
 
 # -------------------------------------------------------------------------------
-
+class case_cgi_file(base_Case):
+    """cgi file exists"""
 
     def run_cgi(self, handler):
         print("Path cgi : ", handler.full_path)

@@ -1,0 +1,14 @@
+1. To check different types:
+
+{
+  __schema {
+    types {
+      name
+    }
+  }
+}
+
+
+2. 
+
+
