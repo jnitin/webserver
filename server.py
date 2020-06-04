@@ -184,8 +184,10 @@ class CaseAlwaysFail(BaseCase):
 class RequestHandler(CGIHTTPRequestHandler):
     """If the requested path maps to a file, that file is served.
     If anything goes wrong, an error page is constructed."""
+    logger.info("Request handle is processed, in case of failure error page is constructed.")
 
     protocol_version = 'HTTP/1.1'
+    logger.info("USing protocol version: %s", str(protocol_version))
 
     buffer = 1
     log_file = open(LOG_FILENAME, 'w', buffer)
@@ -209,6 +211,7 @@ class RequestHandler(CGIHTTPRequestHandler):
 
     def guess_type(self, path):
         mimetype = CGIHTTPRequestHandler.guess_type(self, path)
+        logger.info("Type of request handler: %s", str(mimetype))
         if mimetype == 'application/octet-stream':
             if path.endswith('manifest'):
                 mimetype = 'text/cache-manifest'
@@ -226,11 +229,13 @@ class RequestHandler(CGIHTTPRequestHandler):
 
             for case in self.Cases:
                 if case.test(self):
+                    logger.info("In case if test is successful action is processed at path: %s",
+                                str(self.full_path))
                     case.act(self)
                     break
 
         except Exception as msg:
-            logger.info("Exception occurred :", msg)
+            logger.info("Exception occurred with msg: %s :", msg)
             self.handle_error(msg)
 
     def do_POST(self):
@@ -243,6 +248,7 @@ class RequestHandler(CGIHTTPRequestHandler):
         self.send_response(200)
         self.end_headers()
         response = BytesIO()
+        logger.info("Response to be posted: %s", str(response))
         response.write(b'This is POST request. ')
         response.write(b'Received: ')
         response.write(body)
@@ -256,17 +262,19 @@ class RequestHandler(CGIHTTPRequestHandler):
         filename = os.path.basename(self.path)
         file_length = int(self.headers['Content-Length'])
         with open(filename, 'wb') as output_file:
+            logger.info("File %s is opened to write response", str(filename))
             output_file.write(self.rfile.read(file_length))
         self.send_response(201, 'Created')
         self.end_headers()
         reply_body = 'Saved "%s"\n' % filename
+        logger.info("Replying with: %d", str(reply_body))
         self.wfile.write(reply_body.encode('utf-8'))
         self.close_connection = True
 
     # Handle unknown objects.
     def handle_error(self, msg):
         """This is handler error method with one args as msg"""
-        logger.info('handle_error...\n')
+        logger.info('handle_error msg %s', str(msg))
         content = self.Error_Page.format(path=self.path, msg=msg)
         self.send_content(content, 404)
 
@@ -279,6 +287,7 @@ class RequestHandler(CGIHTTPRequestHandler):
         if ctype == 'application/octet-stream':
             ctype = 'text/html'
         self.send_header("Content-type", ctype)
+        logger.info("Header is sent with type: %s", ctype)
         self.send_header("Content-Length", str(len(content)))
         self.end_headers()
         self.wfile.write(content)
