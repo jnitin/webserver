@@ -219,6 +219,11 @@ class RequestHandler(CGIHTTPRequestHandler):
 
     # Classify and handle request.
 
+    def do_HEAD(self):
+        logger.info("Thread Count :%s ", threading.active_count())
+        logger.info("\n%s\nPath: %s\nHeaders:\n%s",
+                    str(self.requestline), str(self.path), str(self.headers))
+
     def do_GET(self):
         logger.info("Thread Count :%s ", threading.active_count())
         logger.info("\n%s\nPath: %s\nHeaders:\n%s",
