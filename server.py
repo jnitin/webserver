@@ -249,7 +249,7 @@ class RequestHandler(CGIHTTPRequestHandler):
         self.wfile.write(response.getvalue())
         self.close_connection = True
 
-    def do_put(self):
+    def do_PUT(self):
         """This is do_PUT method"""
         logger.info("\n%s\nPath: %s\nHeaders:\n%s",
                     str(self.requestline), str(self.path), str(self.headers))
