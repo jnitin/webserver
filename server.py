@@ -223,6 +223,7 @@ class RequestHandler(CGIHTTPRequestHandler):
         logger.info("Thread Count :%s ", threading.active_count())
         logger.info("\n%s\nPath: %s\nHeaders:\n%s",
                     str(self.requestline), str(self.path), str(self.headers))
+        self.close_connection = True
 
     def do_GET(self):
         logger.info("Thread Count :%s ", threading.active_count())
